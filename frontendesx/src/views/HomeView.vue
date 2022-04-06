@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       users: [],
-      lodUserId: window.localStorage.getItem("id"),
+      // lodUserId: window.localStorage.getItem("id"),
     };
   },
 
