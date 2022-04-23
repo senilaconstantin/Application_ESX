@@ -1,5 +1,6 @@
 package com.example.siteESX.repository;
 
+import com.example.siteESX.model.Abonament;
 import com.example.siteESX.model.User;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
@@ -27,11 +28,25 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
     @Query("match (u:User{id: $id}) delete u")
     void deleteUser(@Param("id") String id);
 
-    @Query("MATCH\n" +
-            "  (u:User),\n" +
-            "  (a:Abonament)\n" +
-            "WHERE a.id = $idUser AND b.id = $idAbonament" +
-            "CREATE (u)-[r:H]->(a) ")
+
+
+    ///////////////Relatie
+    @Query("MATCH (a:User{id: $idUser})\n" +
+            "MATCH (b:Abonament{id: $idAbonament}) \n" +
+            "CREATE (a)-[r:Has_Abonament]->(b)")
     void addArc(@Param("idUser") String idUser, @Param("idAbonament") String idAbonament);
 
+    @Query("MATCH (a:Abonament{id: $idAbonament})\n" +
+            "MATCH (b:User{id: $idUser}) \n" +
+            "CREATE (a)-[r:Has_Abonament]->(b)")
+    void addArcI(@Param("idUser") String idUser, @Param("idAbonament") String idAbonament);
+
+    ///Delete Arc
+    @Query("MATCH (:User {id:$idUser})-[r:Has_Abonament]->(:Abonament {id:$idAbonament}) DELETE r")
+    void deleteArc(@Param("idUser") String idUser, @Param("idAbonament") String idAbonament);
+    @Query("MATCH (:Abonament {id:$idAbonament})-[r:Has_Abonament]->(:User {id:$idUser}) DELETE r")
+    void deleteArcI(@Param("idUser") String idUser, @Param("idAbonament") String idAbonament);
+    ////GetAbonament
+    @Query("MATCH (a:Abonament {id:$idAbonament})-[:Has_Abonament]-(u:User{id:$idUser}) return a")
+    Abonament getAbonament(@Param("idUser") String idUser, @Param("idAbonament") String idAbonament);
 }

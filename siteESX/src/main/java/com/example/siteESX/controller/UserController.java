@@ -1,5 +1,6 @@
 package com.example.siteESX.controller;
 
+import com.example.siteESX.model.AddAbonament;
 import com.example.siteESX.model.User;
 import com.example.siteESX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,12 +80,30 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-//    @PostMapping()
-//    public ResponseEntity addArc(@RequestBody String idUser, @RequestBody String idAbonament){
-//        User user = userService.getUserID(idUser);
-//        if (user == null)
-//            return new ResponseEntity(HttpStatus.NOT_FOUND);
-//        userService.addArc(idUser, idAbonament);
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
+    @PostMapping("/addArc")
+    public ResponseEntity addArc(@RequestBody AddAbonament arcA){
+        User user = userService.getUserID(arcA.getIdUser());
+        if (user == null)
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        userService.addArc(arcA.getIdUser(), arcA.getIdAbonament());
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteArc/{idUser}/{idAbonament}")
+    public ResponseEntity deleteArc(@PathVariable String idUser, @PathVariable String idAbonament){
+        User user = userService.getUserID(idUser);
+        if (user == null)
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        userService.deleteArc(idUser, idAbonament);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/getAb/{idUser}/{idAbonament}")
+    public ResponseEntity getAbonament(@PathVariable String idUser, @PathVariable String idAbonament){
+        User user = userService.getUserID(idUser);
+        if (user == null)
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        return ResponseEntity.ok(userService.getAbonament(idUser, idAbonament));
+    }
 }

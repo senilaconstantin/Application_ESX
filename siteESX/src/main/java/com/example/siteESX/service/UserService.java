@@ -1,5 +1,6 @@
 package com.example.siteESX.service;
 
+import com.example.siteESX.model.Abonament;
 import com.example.siteESX.model.User;
 import com.example.siteESX.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,15 @@ public class UserService {
 
     public void addArc(String idUser, String idAbonament) {
         userRepository.addArc(idUser, idAbonament);
+//        userRepository.addArcI(idUser,idAbonament);
+    }
+    public void deleteArc(String idUser, String idAbonament) {
+        userRepository.deleteArc(idUser, idAbonament);
+//        userRepository.deleteArcI(idUser,idAbonament);
+    }
+
+    public Abonament getAbonament(String idUser, String idAbonament){
+        return userRepository.getAbonament(idUser,idAbonament);
     }
 
 

@@ -17,8 +17,8 @@ public class User {
     private String password;
     private String adress;
 
-    @Relationship(type = "Has", direction = Relationship.INCOMING)
-    private List<Abonament> abonament;
+    /*@Relationship(type = "Has", direction = Relationship.INCOMING)
+    private Abonament abonament;*/
 
     public User(String id, String firstName, String lastName, String mail, String password, String adress) {
         this.id = id;
