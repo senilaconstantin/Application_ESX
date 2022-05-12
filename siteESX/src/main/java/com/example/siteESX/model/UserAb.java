@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @NodeEntity
-public class User {
+public class UserAb {
     @GraphId
     private Long idUser;
 
@@ -20,43 +20,16 @@ public class User {
     private String password;
     private String adress;
 
-    private String role;
-
-    @Relationship(type="Rating_User",direction=Relationship.OUTGOING)
-    private Set<Rating> rating=new HashSet<Rating>();
+    private String tipAbonament;
+//    @Relationship(type="Rating_User",direction=Relationship.OUTGOING)
+//    private Set<Rating> rating=new HashSet<Rating>();
 
 
     /*@Relationship(type = "Has", direction = Relationship.INCOMING)
     private Abonament abonament;*/
 
-    public User(String id, String firstName, String lastName, String mail, String password, String adress) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mail = mail;
-        this.password = password;
-        this.adress = adress;
-    }
 
-    public User(String id, String firstName, String lastName, String mail, String password, String adress, String role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mail = mail;
-        this.password = password;
-        this.adress = adress;
-        this.role = role;
-    }
 
-    public User(String firstName, String lastName, String mail, String adress) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mail = mail;
-        this.adress = adress;
-    }
-
-    public User() {
-    }
 
     public String getId() {
         return id;
@@ -115,11 +88,11 @@ public class User {
         this.adress = adress;
     }
 
-    public String getRole() {
-        return role;
+    public String getTipAbonament() {
+        return tipAbonament;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setTipAbonament(String tipAbonament) {
+        this.tipAbonament = tipAbonament;
     }
 }

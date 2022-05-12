@@ -1,9 +1,12 @@
 package com.example.siteESX.controller;
 
+import com.example.siteESX.model.Abonament;
 import com.example.siteESX.model.AddAbonament;
 import com.example.siteESX.model.User;
+import com.example.siteESX.model.UserAb;
 import com.example.siteESX.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -33,6 +36,15 @@ public class UserController {
 
         return ResponseEntity.ok(useru);
     }
+    @PostMapping("/login/admin")
+    public ResponseEntity<User> loginAdmin(@RequestBody User user) {
+        User useru=userService.loginAdmin(user.getMail(), user.getPassword());
+        if(useru==null){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        return ResponseEntity.ok(useru);
+    }
 
 
     @GetMapping("/{id}")
@@ -41,6 +53,18 @@ public class UserController {
         if (user1 == null)
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(userService.getUserID(id));
+    }
+
+    @GetMapping("/getAll/{id}")
+    public HttpEntity<? extends Object> getUsers(@PathVariable String id) {
+        User user1 = userService.getUserID(id);
+        if (user1 == null)
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+
+        Collection<User> users=userService.getAll();
+        users.remove(user1);
+
+        return ResponseEntity.ok(users);
     }
 
     @PutMapping()
@@ -71,6 +95,19 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PostMapping("/ab")
+    public ResponseEntity addUser(@RequestBody UserAb user) {
+        user.setId(UUID.randomUUID().toString());
+
+        Collection<User> us = userService.getAll();
+        for (User u : us) {
+            if (u.getMail().equals(user.getMail()))
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        userService.addUserAb(user);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable String id) {
         User user = userService.getUserID(id);
@@ -89,21 +126,21 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteArc/{idUser}/{idAbonament}")
-    public ResponseEntity deleteArc(@PathVariable String idUser, @PathVariable String idAbonament){
+    @DeleteMapping("/deleteArc/{idUser}")
+    public ResponseEntity deleteArc(@PathVariable String idUser){
         User user = userService.getUserID(idUser);
         if (user == null)
             return new ResponseEntity(HttpStatus.NOT_FOUND);
-        userService.deleteArc(idUser, idAbonament);
+        userService.deleteArc(idUser);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("/getAb/{idUser}/{idAbonament}")
-    public ResponseEntity getAbonament(@PathVariable String idUser, @PathVariable String idAbonament){
+    @GetMapping("/getAb/{idUser}")
+    public ResponseEntity<Abonament> getAbonament(@PathVariable String idUser){
         User user = userService.getUserID(idUser);
         if (user == null)
             return new ResponseEntity(HttpStatus.NOT_FOUND);
-
-        return ResponseEntity.ok(userService.getAbonament(idUser, idAbonament));
+//        System.out.println("ajuns aici");
+        return ResponseEntity.ok(userService.getAbonament(idUser));
     }
 }

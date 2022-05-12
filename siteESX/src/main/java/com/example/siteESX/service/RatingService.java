@@ -25,7 +25,13 @@ public class RatingService {
     }
 
     public void addRating(Rating rating) {
-        ratingRepository.addRating(rating.getId(), rating.getNote(), rating.getComment());
+        ratingRepository.addRating(rating.getId(), rating.getNote(), rating.getComment(), rating.getIdGym(), rating.getIdUser());
+        ratingRepository.addUserRatingArc(rating.getIdUser(),rating.getId());
+        ratingRepository.addRatingGymArc(rating.getId(),rating.getIdGym());
+    }
+
+    public Collection<Rating> getRatingGym(String idGym) {
+        return ratingRepository.getRating(idGym);
     }
 
     public void deleteRating(String id) {

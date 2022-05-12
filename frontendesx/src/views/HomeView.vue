@@ -30,12 +30,7 @@
               <v-btn
                 color="success"
                 class="mr-4"
-                @click="
-                  $router.push({
-                    name: 'update',
-                    params: { id: lodUserId },
-                  })
-                "
+                @click="update(lodUserId)"
               >
                 Update
               </v-btn>
@@ -48,7 +43,7 @@
               </v-btn>
             </div>
             <v-list subheader two-line>
-              <v-subheader inset>Folders</v-subheader>
+              <v-subheader inset>Users</v-subheader>
 
               <v-list-item v-for="user in users" :key="user.id">
                 <v-list-item-avatar>
@@ -116,7 +111,14 @@ export default {
     async getUsers(){
       var result = await axios.get("http://localhost:8081/users/");
       this.users = result.data;
-    }
+    },
+    async update(id) {
+      window.localStorage.setItem("back", "home");
+      this.$router.push({
+        name: "update",
+        params: { id: id },
+      });
+    },
   },
 };
 </script>

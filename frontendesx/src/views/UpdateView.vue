@@ -9,44 +9,23 @@
               <v-text-field label="First Name" type="text" v-model="fnChange" />
               <!-- {{fnChange}} -->
 
-              <h1>Last Name</h1>
-              <input type="text" v-model="lnChange" />
+              <!-- <h1>Last Name</h1> -->
+              <!-- <input type="text" v-model="lnChange" /> -->
+              <v-text-field label="Last Name" type="text" v-model="lnChange" />
 
-              <h1>Email</h1>
-              <input type="text" v-model="emailChange" />
+              <!-- <h1>Email</h1>
+              <input type="text" v-model="emailChange" /> -->
+              <v-text-field label="Email" type="text" v-model="emailChange" />
 
-              <h1>Adress</h1>
-              <input type="text" v-model="adressChange" />
-
-              <!-- <v-expansion-panels v-model="panel" :disabled="disabled" multiple>
-              <v-panel-header>First Name</v-panel-header>
-
-              <v-expansion-panels v-model="panel" :disabled="disabled" multiple>
-                <v-expansion-panel>
-                  <v-panel-header>First Name</v-panel-header>
-                  <h1>{{ user.firstName }}</h1>
-                </v-expansion-panel>
-
-               <v-expansion-panel>
-                  <v-panel-header>Last Name</v-panel-header>
-                  <h1>{{ user.lastName }}</h1>
-                </v-expansion-panel>
-
-                <v-expansion-panel>
-                  <v-panel-header>Email</v-panel-header>
-                  <h1>{{ user.mail }}</h1>
-                </v-expansion-panel>
-
-                <v-expansion-panel>
-                  <v-panel-header>Adress</v-panel-header>
-                  <h1>{{ user.adress }}</h1>
-                </v-expansion-panel>
-              </v-expansion-panels>  -->
+              <!-- <h1>Adress</h1>
+              <input type="text" v-model="adressChange" /> -->
+              
+              <v-text-field label="Adress" type="text" v-model="adressChange" />
 
               <v-btn
                 color="success"
                 class="mr-4"
-                @click="$router.push({ name: 'home' })"
+                @click="$router.push({ name: back1 })"
               >
                 Back
               </v-btn>
@@ -73,12 +52,13 @@ export default {
       lnChange: "",
       emailChange: "",
       adressChange: "",
+      back1: window.localStorage.getItem("back"),
     };
   },
 
   async created() {
+  // alert(this.$route.params.id);
     var result = await axios.get(
-      // "http://localhost:8081/users/" + window.localStorage.getItem("id")
       "http://localhost:8081/users/"+this.$route.params.id
     );
     this.user = result.data;

@@ -1,6 +1,7 @@
+
 <template>
   <v-app>
-    <v-app-bar
+    <!-- <v-app-bar
       app
       color="primary"
       dark
@@ -26,32 +27,31 @@
       </div>
 
       <v-spacer></v-spacer>
-
-      <!-- <v-btn
-        text
-        @click="$router.push({name: 'matches' })"
-      >
-        <span class="mr-2">My Matches</span>
-      </v-btn> -->
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  
+  name: "App",
+
   data: () => ({
-    
     //
   }),
 };
 </script>
+
+<style>
+#app {
+  background: url("https://ohlaladani.com.br/wp-content/uploads/wallpaper-OHLALADANI_DESKTOP_WALLPAPERS_AVENTURA-2.jpg")
+    no-repeat center center fixed !important;
+  background-size: cover;
+}
+</style>
 
 
 

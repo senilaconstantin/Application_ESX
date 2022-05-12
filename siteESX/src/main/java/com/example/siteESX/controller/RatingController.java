@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.UUID;
 
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rating")
 public class RatingController {
@@ -47,6 +49,15 @@ public class RatingController {
 
         ratingService.addRating(rating);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/ratingGym/{idGym}")
+    public ResponseEntity<Collection<Rating>> getRatingGym(@PathVariable String idGym) {
+        Collection<Rating> u=ratingService.getRatingGym(idGym);
+        for(Rating r: u){
+            r.getUser().setPassword(null);
+        }
+        return ResponseEntity.ok(u);
     }
 
     @DeleteMapping("/{id}")
