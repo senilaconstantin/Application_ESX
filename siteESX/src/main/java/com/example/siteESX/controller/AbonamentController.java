@@ -40,10 +40,15 @@ public class AbonamentController {
         if (abonament1 == null)
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         Collection<Abonament> ab=abonamentService.getAll();
+        int cnt=0;
         for(Abonament abon:ab){
             if(abon.getTipAbonament().equals(abonament.getTipAbonament())){
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                cnt++;
+
             }
+        }
+        if(cnt>1){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
         abonamentService.update(abonament);
         return new ResponseEntity(HttpStatus.OK);

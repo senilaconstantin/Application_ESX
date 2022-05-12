@@ -64,7 +64,7 @@
                   </v-list-item-content>
 
                   <v-item-action>
-                    <v-btn icon @click="dialog = true">
+                    <v-btn icon @click="addRD(gym.id)">
                       <v-icon color="grey lighten-1">mdi-star</v-icon>
                     </v-btn>
                     <v-btn icon @click="reviewView(gym.id)">
@@ -99,7 +99,7 @@
                           <v-btn
                             color="primary"
                             flat
-                            @click="addReview(gym.id)"
+                            @click="addReview(gm)"
                           >
                             Rate Now
                           </v-btn>
@@ -127,13 +127,14 @@ export default {
       subscriptions: "",
       idSubs: "",
       comment: "",
+      gm:"",
       rating: 0,
       gyms: [],
       dialog: false,
       drawer: false,
       links: [
         { icon: "mdi-home", text: "Home", route: "/home" },
-        { icon: "mdi-account-multiple", text: "Users", route: "/home" },
+        // { icon: "mdi-account-multiple", text: "Users", route: "/home" },
         {
           icon: "mdi-clipboard-text",
           text: "Subscriptions",
@@ -169,6 +170,11 @@ export default {
   },
 
   methods: {
+    async addRD(id){
+      this.dialog = true;
+      this.gm=id;
+
+    },
     async addReview(idGym) {
       this.dialog = false;
       // alert(idGym);

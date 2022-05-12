@@ -122,6 +122,7 @@ export default {
   },
   methods: {
     async updateSubscriptions() {
+      // alert(this.idAb+" "+this.tip+" "+this.pret);
       try {
         await axios.put("http://localhost:8081/abonament", {
           id: this.idAb, ///this.$route.params.idAb,

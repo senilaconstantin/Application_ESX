@@ -44,7 +44,7 @@
             <v-app>
               <v-list subheader two-line>
                 <div v-if="ok == true">
-                  <v-subheader inset>Subscription</v-subheader>
+                  <v-subheader inset>My Subscription</v-subheader>
 
                   <!-- <v-list-item v-for="gym in subscriptions" :key="gym.id"> -->
                   <v-list-item>
@@ -107,7 +107,7 @@
                 </div>
                 <!-- /////////////////////////////////////////////////// -->
                 <div v-else-if="ok == false">
-                  <v-subheader inset>Subscriptions</v-subheader>
+                  <v-subheader inset>Chose Subscription</v-subheader>
 
                   <v-list-item v-for="subs in subscriptions" :key="subs.id">
                     <v-list-item-avatar>
@@ -124,7 +124,7 @@
 
                     <v-list-item-action>
                       <v-btn icon @click="add(subs.id)">
-                        <v-icon color="grey lighten-1">mdi-pencil</v-icon>
+                        <v-icon color="grey lighten-1">mdi-plus</v-icon>
                       </v-btn>
                     </v-list-item-action>
                   </v-list-item>
@@ -154,7 +154,7 @@ export default {
       drawer: false,
       links: [
         { icon: "mdi-home", text: "Home", route: "/home" },
-        { icon: "mdi-account-multiple", text: "Users", route: "/home" },
+        // { icon: "mdi-account-multiple", text: "Users", route: "/home" },
         {
           icon: "mdi-clipboard-text",
           text: "Subscriptions",

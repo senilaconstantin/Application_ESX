@@ -102,7 +102,7 @@ export default {
       drawer: false,
       links: [
         { icon: "mdi-home", text: "Home", route: "/homeAdmin" },
-        { icon: "mdi-account-multiple", text: "Users", route: "/admin/users" },
+        // { icon: "mdi-account-multiple", text: "Users", route: "/admin/users" },
         {
           icon: "mdi-clipboard-text",
           text: "Subscriptions",

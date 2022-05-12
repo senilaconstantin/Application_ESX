@@ -21,6 +21,6 @@ public interface SalaRepository extends Neo4jRepository<Sala, Long> {
     @Query("CREATE (:Sala{id:$id, name:$name, adress: $adress})")
     void addSala(@Param("id") String id, @Param("name") String name, @Param("adress") String adress);
 
-    @Query("match (s:Sala{id: $id}) delete s")
+    @Query("match (s:Sala{id: $id}) detach delete s")
     void deleteSala(@Param("id") String id);
 }

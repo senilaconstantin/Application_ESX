@@ -99,7 +99,7 @@ export default {
       drawer: false,
       links: [
         { icon: "mdi-home", text: "Home", route: "/home" },
-        { icon: "mdi-account-multiple", text: "Users", route: "/home" },
+        // { icon: "mdi-account-multiple", text: "Users", route: "/home" },
         {
           icon: "mdi-clipboard-text",
           text: "Subscriptions",

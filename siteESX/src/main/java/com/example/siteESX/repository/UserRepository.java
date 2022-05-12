@@ -31,7 +31,7 @@ public interface UserRepository extends Neo4jRepository<User, Long> {
     @Query("MATCH (a:Abonament{tipAbonament: $tipAbonament}) CREATE (u:User{id:$id, firstName:$firstName, lastName: $lastName, mail:$mail, password:$password, adress:$adress}) CREATE (u)-[:Has_Abonament]->(a)")
     void addUserAb(@Param("id") String id, @Param("firstName") String firstName, @Param("lastName") String lastName, @Param("mail") String mail, @Param("password") String password, @Param("adress") String adress, @Param("tipAbonament") String tipAbonament);
 
-    @Query("match (u:User{id: $id}) delete u")
+    @Query("match (u:User{id: $id}) detach delete u")
     void deleteUser(@Param("id") String id);
 
     ///////////////Relatie
